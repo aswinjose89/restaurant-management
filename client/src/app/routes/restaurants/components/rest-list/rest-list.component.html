@@ -1,0 +1,136 @@
+
+<mat-card>
+    <mat-card-title class="text-center">Search Restaurant's & Menu Item's</mat-card-title>
+    <form [formGroup]="searchRestaurantForm" class="form-field-full">
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+          <div fxFlex="20" fxFlex.lt-md="20">
+            <mat-form-field>
+                <mat-label>Menu Item Name</mat-label>
+                <input type="text"
+                       placeholder="Item Name"
+                       aria-label="name"
+                       matInput
+                       formControlName="itemName"
+                       [matAutocomplete]="itemAuto">
+                <mat-autocomplete autoActiveFirstOption #itemAuto="matAutocomplete" [displayWith]="displayWith">
+                  <mat-option *ngFor="let option of menuItemNameOptions | async" [value]="option.value">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          </div>
+
+          <div fxFlex="20" fxFlex.lt-md="20">
+            <mat-form-field>
+                <mat-label>Restaurant Name</mat-label>
+                <input type="text"
+                       placeholder="Restaurant Name"
+                       aria-label="name"
+                       matInput
+                       formControlName="name"
+                       [matAutocomplete]="nameAuto">
+                <mat-autocomplete autoActiveFirstOption #nameAuto="matAutocomplete" [displayWith]="displayWith">
+                  <mat-option *ngFor="let option of restaurantOptions | async" [value]="option.value">
+                    {{option.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+          </div>
+
+          <div fxFlex="20" fxFlex.lt-md="20">
+              <mat-form-field>
+                <mat-label>Restaurant Rating</mat-label>
+                <mat-select name="restaurantRating" formControlName="restaurantRating">
+                  <mat-option *ngFor="let option of ratingOptionList" [value]="option.value">
+                    {{option.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+
+          <div fxFlex="20" fxFlex.lt-md="20">
+
+            <mat-form-field>
+              <mat-label>Menu Item Rating</mat-label>
+              <mat-select name="menuRating" formControlName="menuRating">
+                <mat-option *ngFor="let option of ratingOptionList" [value]="option.value">
+                  {{option.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="20" fxFlex.lt-md="20">
+            <mat-form-field>
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Name" formControlName="address">
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" (click)="submit(searchRestaurantForm)">Search</button>
+          <button mat-raised-button color="secondary" (click)="reset(searchRestaurantForm)" class="ms-2">Reset</button>
+        </div>
+      </form>
+      
+</mat-card>
+<div fxLayout="row wrap" fxLayoutGap="2% grid">     
+<ng-container *ngFor="let restaurant of restaurantList">
+  <div fxFlex="25" fxFlex.lt-md="25">
+  <mat-card>
+      <img mat-card-image src="assets/images/restaurants/restaurant/hotel.jpg" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <h5 class="text-center">{{restaurant.name}}</h5>
+        <p class="text-indent">
+          {{restaurant.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="mb-0">
+        <div class="row">
+          <div class="col-md-6">
+            Operation timing:</div>
+          <div class="col-md-6 font-weight-bold text-right display-content">10:00AM - 10:00PM</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            Average Rating:</div>
+          <div class="col-md-6 font-weight-bold text-danger text-center">{{restaurant.average_rating}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              Address:
+            </div>
+            <div class="col-md-12 text-indent font-weight-bold">
+              {{restaurant.address}}
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              Contact:
+            </div>
+            <div class="col-md-12 text-indent font-weight-bold">
+              {{restaurant.number}}
+            </div>
+        </div>        
+        <div class="row">
+          <div class="col-md-12">
+            Consumer Review 
+            <div class="col-md-12 text-center">
+                <app-star-rating [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event, restaurant)"></app-star-rating>
+            </div>
+          </div>
+        </div>
+      </mat-card-actions>
+      <mat-card-actions>
+        <div class="row">
+          <div class="col-md-12 text-center">
+              <button mat-raised-button color="primary" matTooltip="{{restaurant.menus.length}} menus found" (click)="viewMenu(restaurant, searchRestaurantForm)">View Menu</button>
+          </div>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-container>
+</div>

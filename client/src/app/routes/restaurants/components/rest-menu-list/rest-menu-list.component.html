@@ -1,0 +1,83 @@
+<h1>Menu items</h1>
+<div *ngIf="menuList && menuList.length>0;then menutpl else msgtpl">here is ignored</div>
+<ng-template #menutpl>
+  <div fxLayout="row wrap" fxLayoutGap="2% grid">  
+    <ng-container *ngFor="let menu of menuList">
+      <div fxFlex="25" fxFlex.lt-md="25">
+        <mat-card>
+          <img mat-card-image src="assets/images/restaurants/menu/sandwich.jpg" alt="menu">
+          <mat-card-content>
+            <h5>{{menu.itemName}}</h5>
+            <p>
+              {{menu.description}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="row">
+              <div class="col-md-5">
+                <mat-icon matPrefix class="mat-icon-font">breakfast_dining</mat-icon>
+                Category:</div>
+              <div class="col-md-3 position-relative">
+                <div class="w-100 dot"></div>
+              </div>
+              <div class="col-md-4 font-weight-bold text-right">{{menu.category}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <mat-icon matPrefix class="mat-icon-font">offline_pin</mat-icon>
+                Availability:</div>
+              <div class="col-md-3 position-relative">
+                <div class="w-100 dot"></div>
+              </div>
+              <div class="col-md-4 font-weight-bold text-right">{{(menu.availability=='Yes')?'Available': 'Not-Available'}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <mat-icon matPrefix class="mat-icon-font">emoji_food_beverage</mat-icon>
+                Vegetarian:</div>
+              <div class="col-md-3 position-relative">
+                <div class="w-100 dot"></div>
+              </div>
+              <div class="col-md-4 font-weight-bold text-right">No</div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-icon matPrefix class="mat-icon-font">star</mat-icon>
+                Average Rating:</div>
+              <div class="col-md-2 position-relative">
+                <div class="w-100 dot"></div>
+              </div>
+              <div class="col-md-4 font-weight-bold text-right text-danger">{{menu.average_rating?.toFixed(2)}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-icon matPrefix class="mat-icon-font">restaurants</mat-icon>
+                Restaurant name is <span class="text-primary"><i>{{menu.name}}</i></span> </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                Consumer Review 
+                <div class="col-md-12 text-center">
+                    <app-star-rating [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event, menu)"></app-star-rating>
+                </div>
+              </div>
+            </div>
+          </mat-card-actions>
+          <mat-divider inset></mat-divider>
+          <mat-card-actions>
+            <div class="row">
+              <div class="col-md-4 text-danger">
+                <h4>25$</h4></div>
+              <div class="col-md-4 position-relative">
+              </div>
+              <div class="col-md-4 font-weight-bold text-right">
+                <mat-icon matSuffix >shopping_cart</mat-icon>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+<ng-template #msgtpl>{{(this.restaurant)? 'No Menu Found for '+ this.restaurant: 'No Menu Found. Please create a new menu'}}</ng-template>

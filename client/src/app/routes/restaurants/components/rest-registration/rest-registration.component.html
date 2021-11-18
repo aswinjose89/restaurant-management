@@ -1,0 +1,63 @@
+<mat-card class="w-50 mx-auto">
+    <mat-card-title class="text-center">Register Your Restaurant</mat-card-title>
+    <form [formGroup]="addRestaurantForm" class="form-field-full">
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+      
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <mat-form-field>
+              <mat-label>Restaurant Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" minlength="3" maxlength="15" required>
+              <mat-error *ngIf="addRestaurantForm.get('name').errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="addRestaurantForm.get('name').errors?.minlength">
+                Enter minimun 3 character
+              </mat-error>
+              <mat-error *ngIf="addRestaurantForm.get('name').errors?.maxlength">
+                Enter maximum 15 character
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <mat-form-field>
+              <mat-label>Description</mat-label>
+              <textarea matInput placeholder="Explain your restaurant service details" formControlName="description" required></textarea>
+              <mat-error *ngIf="addRestaurantForm.get('description').errors?.required">
+                Field is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+      
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <mat-form-field>
+              <mat-label>Address</mat-label>
+              <textarea matInput placeholder="Address" formControlName="address" required></textarea>
+              <mat-error *ngIf="addRestaurantForm.get('address').errors?.required">
+                Field is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100" fxFlex.lt-md="100">
+            <mat-form-field>
+              <mat-label>Contact Number</mat-label>
+              <input matInput placeholder="Phone Number" type="number" formControlName="number"
+                      required>
+              <mat-icon matSuffix>smartphone</mat-icon>
+              <mat-error *ngIf="addRestaurantForm.get('number').errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="addRestaurantForm.get('number').invalid">Invalid Input</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" (click)="submit(addRestaurantForm)">Submit</button>
+          <button mat-raised-button color="secondary" (click)="reset(addRestaurantForm)" class="ms-2">Reset</button>
+          <!-- <button mat-raised-button color="secondary" (click)="goBack()" class="ms-2">Back</button> -->
+        </div>
+      </form>
+      
+</mat-card>
+  

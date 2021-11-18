@@ -1,0 +1,91 @@
+<mat-card class="w-50 mx-auto">
+  <mat-card-title class="text-center">Add Restaurant Menu Item</mat-card-title>
+  <form [formGroup]="addMenuForm" class="form-field-full">
+      <div fxLayout="row wrap" fxLayoutGap="8px grid">   
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <mat-form-field>
+              <mat-label>Restaurant Name</mat-label>
+              <input type="text"
+                     placeholder="Restaurant Name"
+                     aria-label="name"
+                     matInput
+                     formControlName="name"
+                     [matAutocomplete]="autoName">
+              <mat-autocomplete autoActiveFirstOption #autoName="matAutocomplete" [displayWith]="displayWith" required>
+                <mat-option *ngFor="let option of restaurantOptions | async" [value]="option.value">
+                  {{option.name}}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="addMenuForm.get('name').errors?.required">
+                Field is required
+              </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <mat-form-field>
+            <mat-label>Item Name</mat-label>
+            <input matInput placeholder="Provide menu item name.For Ex: Paneer Tikka" formControlName="itemName" minlength="3" maxlength="15" required>
+            <mat-error *ngIf="addMenuForm.get('itemName').errors?.required">
+              Field is required
+            </mat-error>
+            <mat-error *ngIf="addMenuForm.get('itemName').errors?.minlength">
+              Enter minimun 3 character
+            </mat-error>
+            <mat-error *ngIf="addMenuForm.get('itemName').errors?.maxlength">
+              Enter maximum 25 character
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="100" fxFlex.lt-md="100">
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Descibe the menu details with ingredients" formControlName="description" required></textarea>
+            <mat-error *ngIf="addMenuForm.get('description').errors?.required">
+              Field is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" fxFlex.lt-md="50">
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <input type="text"
+                   placeholder="Category"
+                   aria-label="category"
+                   matInput
+                   formControlName="category"
+                   [matAutocomplete]="autoCat">
+            <mat-autocomplete autoActiveFirstOption #autoCat="matAutocomplete" [displayWith]="displayWith">
+              <mat-option *ngFor="let option of categoryOptions | async" [value]="option.value">
+                {{option.name}}
+              </mat-option>
+            </mat-autocomplete>
+            <mat-error *ngIf="addMenuForm.get('category').errors?.required">
+              Field is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" fxFlex.lt-md="50">
+          <mat-form-field>
+            <mat-label>Availability</mat-label>
+            <mat-select name="availability" formControlName="availability">
+              <mat-option *ngFor="let option of foodAvailability" [value]="option.value" required>
+                {{option.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addMenuForm.get('availability').errors?.required">
+              Field is required
+            </mat-error>
+          </mat-form-field>
+        </div>          
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="primary" (click)="submit(addMenuForm)">Publish</button>
+        <button mat-raised-button color="secondary" (click)="reset(addMenuForm)" class="ms-2">Reset</button>
+        <!-- <button mat-raised-button color="secondary" (click)="goBack()" class="ms-2">Back</button> -->
+      </div>
+    </form>
+    
+</mat-card>

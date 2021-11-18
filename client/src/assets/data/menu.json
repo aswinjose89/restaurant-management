@@ -1,0 +1,37 @@
+{
+  "menu": [
+    {
+      "route": "restaurants",
+      "name": "restaurants",
+      "type": "sub",
+      "icon": "restaurants",
+      "label": {
+        "color": "indigo-500",
+        "value": "new"
+      },
+      "children": [
+        {
+          "route": "registration",
+          "name": "registration",
+          "type": "link"
+        },
+        {
+          "route": "rest-list",
+          "name": "rest-list",
+          "type": "link"
+        },
+        {
+          "route": "add-menu",
+          "name": "add-menu",
+          "type": "link"
+        },
+        {
+          "route": "menu-list",
+          "name": "menu-list",
+          "type": "link"
+        }
+      ]
+    }
+
+  ]
+}
