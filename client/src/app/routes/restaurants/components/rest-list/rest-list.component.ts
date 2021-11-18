@@ -92,7 +92,7 @@ export class RestListComponent implements OnInit {
           map(value => (typeof value === 'string' ? value : value.name)),
           map(value => this._filter(value, restaurantNames)),
         );
-        this.menuItemNameOptions = this.searchRestaurantForm.controls.name.valueChanges.pipe(
+        this.menuItemNameOptions = this.searchRestaurantForm.controls.itemName.valueChanges.pipe(
           startWith(''),
           map(value => (typeof value === 'string' ? value : value.name)),
           map(value => this._filter(value, menuItemNames)),
