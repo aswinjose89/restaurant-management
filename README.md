@@ -14,7 +14,7 @@ Restaurant management using Angular, Nodejs and MongoDB
 
 #### How to Run:
 
-- Got to client & server directory to install all modules first by typing `npm install` or `yarn add`
+- Go to client & server directory to install all modules first by typing `npm install` or `yarn add`
 
 - to run it please type `npm start` for both client & server
 - Access Url http://localhost:4200/restaurants/registration 0r http://localhost:4200
@@ -41,6 +41,10 @@ Find All MenuItems based on restaurant and click star for menu rating
 Go to menu items by clicking `View Menu` button and you can click star for rating for restaurant
 
 ![alt text](screenshots/menu_redirection_from_restaurant.png)
+
+MongoDB to maintain both restarant & related menuitem in one nested collection
+
+![alt text](screenshots/mongodb.png)
 
 ## 📃 License
 
